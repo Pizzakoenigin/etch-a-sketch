@@ -1,0 +1,8 @@
+'usestrict';
+
+init
+
+function init() {
+
+}
+
