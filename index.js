@@ -7,33 +7,43 @@ function init() {
     container.classList.add('container')
     document.querySelector('body').appendChild(container)
 
-    buildGrid()
+    buildSketcharea()
     eventListener()
 }
 
-function buildGrid() {
+function buildSketcharea() {
     let container = document.querySelector('.container')
+    let sketcharea = document.createElement('div')
     let containerSize = 720
     let squaresPerSide = 100
     let squaresTotal = squaresPerSide * squaresPerSide
     let size = containerSize/squaresPerSide
 
-    container.style.width = `${containerSize}px`
-    container.style.height = `${containerSize}px`
-    container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
+    container.appendChild(sketcharea)
+
+    sketcharea.classList.add('sketcharea')
+    sketcharea.style.width = `${containerSize}px`
+    sketcharea.style.height = `${containerSize}px`
+    sketcharea.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
     
     for (let i = 1; i <= squaresTotal; i++) {
         let square = document.createElement('div');
-        // square.style.width = `${size}px`
-        // square.style.height = `${size}px`        
-        container.appendChild(square)
+        sketcharea.appendChild(square)
         square.classList.add('square')
-
     }
 
-  
     
-    
+    let resetButton = document.createElement("button")
+    container.appendChild(resetButton).textContent = "reset"
+    document.querySelector('button').addEventListener('click', () => {
+        resetGrid()
+    })
+
+}
+
+function resetGrid() {
+    document.querySelector("body").removeChild(document.querySelector(".container"));
+    init()
 }
 
 function eventListener() {
