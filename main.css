@@ -2,6 +2,10 @@
     /* --squareWidth: 2em; */
 }
 
+body {
+    font-family: sans-serif;
+}
+
 .container {
     
 
@@ -14,4 +18,7 @@
 .square {
 
     /* border: rgb(255, 255, 255) solid 1px */
+}
+
+input {
 }
