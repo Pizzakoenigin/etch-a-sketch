@@ -1,8 +1,0 @@
-'usestrict';
-
-init
-
-function init() {
-
-}
-

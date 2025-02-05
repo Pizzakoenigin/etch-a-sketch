@@ -1,0 +1,18 @@
+:root {
+    --squareWidth: 2em;
+    --containerSize: 960px
+}
+
+.container {
+    display: grid;
+    /* gap: 1rem; */
+    grid-template-columns: repeat(auto-fit, var(--squareWidth));
+    width: var(--containerSize);
+    height: var(--containerSize);
+}
+
+.square {
+    width: var(--squareWidth);
+    height: var(--squareWidth);
+    border: black solid 1px
+}
