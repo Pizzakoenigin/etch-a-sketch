@@ -11,11 +11,11 @@ function buildSketcharea(squaresPerSide) {
     let container = document.createElement('div')
     let currentSquaresLabel = document.createElement('p')
     let sketcharea = document.createElement('div')
-    let containerSize = 600
+    let containerSize = 500
     let squaresTotal = squaresPerSide * squaresPerSide
 
     container.classList.add('container')
-    document.querySelector('body').appendChild(container)   
+    document.querySelector('body').appendChild(container)
 
     container.appendChild(currentSquaresLabel).textContent = `current grid: ${squaresPerSide} x ${squaresPerSide} squares`
     container.appendChild(sketcharea)
@@ -32,6 +32,7 @@ function buildSketcharea(squaresPerSide) {
     }
 
     buildResetarea(squaresPerSide)
+    buildColorWheels()
     eventListener()
 }
 
@@ -45,23 +46,90 @@ function buildResetarea(squaresPerSide) {
     container.appendChild(resetButton).textContent = "reset"
     resetButton.classList.add('rstbtn')
     resetLabel.classList.add('rstLabel')
+    setSquaresPerSide.classList.add('rstInput')
 
-    document.querySelector('input').type = "range"
-    document.querySelector('input').min = "1"
-    document.querySelector('input').max = "100"
-    document.querySelector('input').value = squaresPerSide
+    document.querySelector('.rstInput').type = "range"
+    document.querySelector('.rstInput').min = "1"
+    document.querySelector('.rstInput').max = "100"
+    document.querySelector('.rstInput').value = squaresPerSide
 
-    container.appendChild(resetLabel).textContent = `make new grid with ${document.querySelector('input').value} squares`
+    container.appendChild(resetLabel).textContent = `make new grid with ${document.querySelector('.rstInput').value} squares`
 
-    document.querySelector('input').addEventListener("input", () => {
-        document.querySelector('.rstLabel').textContent = `make new grid with ${document.querySelector('input').value} squares`
-        squaresPerSide = document.querySelector('input').value
+    document.querySelector('.rstInput').addEventListener("input", () => {
+        document.querySelector('.rstLabel').textContent = `make new grid with ${document.querySelector('.rstInput').value} squares`
+        squaresPerSide = document.querySelector('.rstInput').value
     })
 
     document.querySelector('button').addEventListener('click', () => {
         document.querySelector("body").removeChild(document.querySelector(".container"));
         buildSketcharea(squaresPerSide)
     })
+}
+
+function buildColorWheels() {
+    let container = document.querySelector('.container')
+    let colorDiv = document.createElement('div')
+    // let colorLabels = ['red', 'green', 'blue']
+    let colorLabels = {'red': {value}}
+
+    container.appendChild(colorDiv).textContent = 'Choose Color'
+
+
+
+    for (let i = 0; i < 3; i++) {
+
+        // createColorInput(colorLabels[i])
+        let colorInput = document.createElement('input')
+        let colorLabel = document.createElement('label')
+        // let value
+        colorDiv.appendChild(colorLabel)
+        // colorLabel.textContent = `${colorLabels[i]}`
+        colorLabel.appendChild(colorInput)
+        colorLabel.classList.add('colorWheel' + colorLabels[i])
+        colorInput.classList.add('colorWheel')
+        colorInput.type = "range"
+        colorInput.type.min = "0"
+        colorInput.type.max = "256"
+
+        colorInput.addEventListener ( "input", () => {
+            colorLabels[i].bla = colorInput.value
+            console.log(colorLabels[i].bla);
+
+            // colorLabel.textContent = `${colorLabels[i]}: ${value}`
+        }
+
+        )
+    }
+
+//     let wheels = document.querySelectorAll('colorWheel')
+//     wheels.forEach((wheel) => {
+//         wheel.addEventListener("input", () => {
+//             // let value = colorInput.value
+//             console.log(wheel.value);
+
+//             // colorLabel.textContent = `${colorLabels[i]}: ${value}`
+//         }
+
+//         )
+//     })
+
+// function createColorInput(color) {
+//     let colorInput = document.createElement('input')
+//     let colorLabel = document.createElement('label')
+//     // let value
+//     colorDiv.appendChild(colorLabel)
+//     // colorLabel.textContent = `${colorLabels[i]}`
+//     colorLabel.appendChild(colorInput)
+//     colorLabel.classList.add('colorWheelLabel' + color)
+//     colorInput.classList.add('colorWheelInput')
+//     colorInput.type = "range"
+//     colorInput.type.min = "0"
+//     colorInput.type.max = "256"
+
+// }
+
+
+
 }
 
 
